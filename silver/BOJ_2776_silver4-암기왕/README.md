@@ -1,0 +1,1 @@
+![연습-203.jpg](README_assets/499bd4d0a6e57413389483ce3c7bd803b046338d.jpg)
