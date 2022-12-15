@@ -33,3 +33,6 @@ else:                       # 작은 수 / 큰 수 시작
     mo = k
     ja = n+1-k
 print(f'{ja}/{mo}')
+
+
+
