@@ -4,48 +4,48 @@ import heapq
 from collections import defaultdict
 input = sys.stdin.readline
 
+# 1. heapq
+# def dijkstra(node):
+#     dist = [float('inf')] * (V+1)
+#     dist[node] = 0
+#     hq = []
+#     heapq.heappush(hq, [0, node])
 
-def dijkstra(node):
-    dist = [float('inf')] * (V+1)
-    dist[node] = 0
-    hq = []
-    heapq.heappush(hq, [0, node])
+#     while hq:
+#         now_w, now_v = heapq.heappop(hq)
+#         for w, v in graph_di[now_v]:
+#             w += now_w
+#             if w < dist[v]:
+#                 dist[v] = w
+#                 heapq.heappush(hq, [w, v])
+#     return dist[1:]
 
-    while hq:
-        now_w, now_v = heapq.heappop(hq)
-        for w, v in graph_di[now_v]:
-            w += now_w
-            if w < dist[v]:
-                dist[v] = w
-                heapq.heappush(hq, [w, v])
-    return dist[1:]
-
-
-# def dijkstra(s):
-#     U = {s}
-#     distance = [float('inf') for _ in range(V+1)]
-#     distance[s] = 0
-#     for e, weight in graph_di[s]:
-#         distance[e] = weight
+# 2. 구현
+def dijkstra(s):
+    U = {s}
+    distance = [float('inf') for _ in range(V+1)]
+    distance[s] = 0
+    for e, weight in graph_di[s]:
+        distance[e] = weight
     
-#     for _ in range(V+1):
+    for _ in range(V+1):
 
-#         min_val = float('inf')
+        min_val = float('inf')
 
-#         idx = -1                                            # ㅕ
+        idx = -1                                            # ㅕ
 
-#         for i in range(V+1):
-#             if i not in U and min_val > distance[i]:
-#                 min_val = distance[i]
-#                 idx = i
-#         if idx > -1:
-#             U.add(idx)
-#         else:
-#             continue
+        for i in range(V+1):
+            if i not in U and min_val > distance[i]:
+                min_val = distance[i]
+                idx = i
+        if idx > -1:
+            U.add(idx)
+        else:
+            continue
 
-#         for e, weight in graph_di[idx]:
-#             distance[e] = min(distance[e], distance[idx] + weight)
-#     return distance[1:]
+        for e, weight in graph_di[idx]:
+            distance[e] = min(distance[e], distance[idx] + weight)
+    return distance[1:]
 
 V, E = map(int,input().split())
 graph_di = defaultdict(list)
