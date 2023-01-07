@@ -3,44 +3,43 @@
 import sys
 from collections import defaultdict, deque
 
-input = sys.stdin.readline
+# input = sys.stdin.readline
 
-t = int(input())
-for _ in range(t):
-    n = int(input())
+# t = int(input())
+# for _ in range(t):
+#     n = int(input())
 
-    graph = defaultdict(list)
-    before_rank = list(map(int, input().split()))
-    visited = set()
-    # node간 간선연결
-    for i in range(n):
-        for j in range(i+1,n):
-            graph[before_rank[i]].append(before_rank[j])
-    graph[before_rank[-1]]
-    # 등수 변경에 의한 간선 뒤집기
-    # print(graph)
-
-    m = int(input())
-    for i in range(m):
-        a, b = map(int, input().split())
-        if b in graph[a]:
-            graph[a].pop(graph[a].index(b))
-            graph[b].append(a)
-        else:
-            graph[b].pop(graph[b].index(a))
-            graph[a].append(b)
-
-
-    # print(graph)
+#     graph = defaultdict(list)
+#     before_rank = list(map(int, input().split()))
     
-    # after_rank 찾기
-    after_rank = [0] * n
-    for k, v in graph.items():
-        after_rank[n-len(v)-1] = k
-    if 0 in after_rank:
-        print('IMPOSSIBLE')
-    else:
-        print(*after_rank)        
+#     # node간 간선연결
+#     for i in range(n):
+#         for j in range(i+1,n):
+#             graph[before_rank[i]].append(before_rank[j])
+#     graph[before_rank[-1]]
+
+#     # 등수 변경에 의한 간선 뒤집기
+#     m = int(input())
+#     for i in range(m):
+#         a, b = map(int, input().split())
+#         if b in graph[a]:
+#             graph[a].pop(graph[a].index(b))
+#             graph[b].append(a)
+#         else:
+#             graph[b].pop(graph[b].index(a))
+#             graph[a].append(b)
+
+
+#     # after_rank 찾기
+#     after_rank = [0] * n
+#     for k, v in graph.items():
+#         after_rank[n-len(v)-1] = k
+
+
+#     if 0 in after_rank:         # 등수가 정해지지 않는 경우
+#         print('IMPOSSIBLE')
+#     else:                       # 모든 등수가 정해지는 경우
+#         print(*after_rank)        
  
 
 ##### 1. 구현 실패
@@ -139,74 +138,4 @@ for _ in range(t):
 #                     print(*after_rank[1:])
 #         except:
 #             print('IMPOSSIBLE') 
-
-
-# from collections import deque
-# import sys
-
-# t = int(sys.stdin.readline())
-
-# for i in range(t):
-#     n = int(sys.stdin.readline())
-
-#     graph = [[] for _ in range(n + 1)]
-#     inDegree = [0 for _ in range(n + 1)]
-#     queue = deque()
-#     answer = []
-#     flag = 0
-
-#     team = list(map(int, sys.stdin.readline().rstrip().split()))
-
-#     for j in range(n - 1):
-#         for k in range(j + 1, n):
-#             graph[team[j]].append(team[k])
-#             inDegree[team[k]] += 1
-
-#     m = int(sys.stdin.readline())
-#     for j in range(m):
-#         first, second = map(int, sys.stdin.readline().rstrip().split())
-#         flag = True
-
-#         for k in graph[first]:
-#             if k == second:
-#                 graph[first].remove(second)
-#                 inDegree[second] -= 1
-#                 graph[second].append(first)
-#                 inDegree[first] += 1
-#                 flag = False
-
-#         if flag:
-#             graph[second].remove(first)
-#             inDegree[first] -= 1
-#             graph[first].append(second)
-#             inDegree[second] += 1
-
-#     for j in range(1, n + 1):
-#         if inDegree[j] == 0:
-#             queue.append(j)
-
-#     if not queue:
-#         print("IMPOSSIBLE")
-#         continue
-
-#     result = True
-#     while queue:
-#         if len(queue) > 1:
-#             result = False
-#             break
-
-#         tmp = queue.popleft()
-#         answer.append(tmp)
-#         for j in graph[tmp]:
-#             inDegree[j] -= 1
-#             if inDegree[j] == 0:
-#                 queue.append(j)
-#             elif inDegree[j] < 0:
-#                 result = False
-#                 break
-
-#     if not result or len(answer) < n:
-#         print("IMPOSSIBLE")
-#     else:
-#         print(*answer)                        
 
