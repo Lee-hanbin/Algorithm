@@ -1,0 +1,69 @@
+# BOJ_17141_gold3-연구소2
+
+import sys
+from collections import deque
+from itertools import combinations
+
+input = sys.stdin.readline
+
+dr = [-1, 1, 0, 0]
+dc = [ 0, 0,-1, 1]
+
+def bfs():
+    que = deque()
+    visited = set()
+    # 바이러스를 터뜨리기
+    for r, c in f_virus:
+        que.append((r, c, 0))
+        visited.add((r,c))
+    # bfs를 통해 바이러스를 퍼뜨리기
+    while que:
+        r, c, cnt = que.popleft()
+        for i in range(4):
+            nr = dr[i] + r
+            nc = dc[i] + c
+            if 0 <= nr < n and 0 <= nc < n and map1[nr][nc] == 0 and (nr, nc) not in visited:
+                # map1[nr][nc] = cnt + 1
+                que.append((nr, nc, cnt + 1))
+                visited.add((nr, nc))
+    # 모든 공간에 바이러스가 퍼지면 cnt, 아니면 -1 반환
+    if len(visited) + wall_cnt == n*n:
+        return cnt
+    else:
+        return -1
+
+
+
+
+n, m = map(int, input().split())
+sol = []
+map1 = []
+virus = []
+wall_cnt = 0
+
+
+# 연구소를 입력 받으면서 바이러스와 벽을 체크
+for i in range(n):
+    map1.append(list(map(int, input().split())))
+    for j, e in enumerate(map1[i]):
+        if e == 2:
+            map1[i][j] = 0
+            virus.append((i,j))
+        elif e == 1:
+            wall_cnt += 1
+
+
+# 바이러스가 존재하는 공간에서 m개를 뽑기
+for i in combinations(virus, m):
+    f_virus = list(i)
+    chk = bfs()
+    if chk > -1:
+        sol.append(chk)
+
+# 최소시간 출력
+if sol:
+    print(min(sol))
+else:
+    print(-1)
+
+
