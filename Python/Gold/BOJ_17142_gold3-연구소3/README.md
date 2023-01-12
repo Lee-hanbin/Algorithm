@@ -1,3 +1,3 @@
-![연습-246.jpg](README_assets/3f61417eb9d6ce79d5a7f80fde89ff9a9dc888ca.jpg)
+![d658cafa9e1eed7e0c5a4d1e9425de6cd5711c2a.jpg](README_assets/d91b4cce3dd9742c710cc1a2f395c07a79207460.jpg)
 
 
