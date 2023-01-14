@@ -4,9 +4,11 @@ import sys
 
 input = sys.stdin.readline
 
+
 def dfs(idx):
     visited[idx] = True
     l = link[idx]
+    # 왼쪽에서 오른쪽 연결하면서 이분 매칭 진행
     for p in l:
         if r2l[p] == 0 or (not visited[r2l[p]] and dfs(r2l[p])):
             r2l[p] = idx
@@ -14,13 +16,14 @@ def dfs(idx):
             return True
     return False
 
+
 n = int(input())
 table = [list(map(int, input().split())) for _ in range(n)]
 right = [[0] * n for _ in range(n)]
 left = [[0] * n for _ in range(n)]
 r, l = 1, 1
 
-# 우하단
+# 좌상단부터 우하단까지 사선으로 체크
 for j in range(n):
     i = 0
     while i<n and 0<=j:
@@ -28,8 +31,6 @@ for j in range(n):
             right[i][j] = r
         i += 1; j -= 1
     r += 1
-
-# 좌하단
 for i in range(1, n):
     j = n-1
     while i<n and 0<=j:
@@ -38,7 +39,7 @@ for i in range(1, n):
         i += 1; j -= 1
     r += 1
 
-# 좌상단
+# 우상단부터 좌하단까지 사선으로 체크
 for j in range(n-1, -1, -1):
     i = 0
     while i<n and j<n:
@@ -46,8 +47,6 @@ for j in range(n-1, -1, -1):
             left[i][j] = l
         i += 1; j += 1
     l += 1
-
-# 우상단
 for i in range(1, n):
     j = 0
     while i<n and j<n:
@@ -56,14 +55,14 @@ for i in range(1, n):
         i += 1; j += 1
     l += 1
 
-# 1<= l, r <=2*n
+# 왼쪽의 노드와 오른쪽의 노드를 매칭
 link = [[] for _ in range(l)]
 for i in range(n):
     for j in range(n):
         if table[i][j]:
             link[left[i][j]].append(right[i][j])
 
-
+# 이분매칭
 l2r = [0] * (2*n)
 r2l = [0] * (2*n)
 ans = 0
@@ -71,7 +70,10 @@ for i in range(1, 2*n):
     visited = [False] * (2*n)
     if dfs(i):
         ans += 1
+        
 print(ans)
+
+
 
 # #   좌상, 우상, 좌하, 우하
 # dr = [-1,-1, 1, 1]
