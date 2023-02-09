@@ -36,7 +36,7 @@ def bfs(idx, level):
                     que.append((nr, nc, time + 1))
                     visited.add((nr, nc))
 
-    if chk_lst_idx:         # 먹을 물고기가 존쟇하면
+    if chk_lst_idx:         # 먹을 물고기가 존재하면
         chk_lst_idx = sorted( chk_lst_idx, key= lambda x : (x[0], x[1]))    # 가장 윗쪽에 가장 왼쪽
         r, c, time = chk_lst_idx[0]
         map1[r][c] = 0      # 먹은 물고기는 map 갱신
