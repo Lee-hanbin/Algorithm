@@ -3,7 +3,7 @@ import sys
 input = sys.stdin.readline
 
 
-# 스택 2개 넣은 풀이... 시간 초과 ㅠㅠㅠㅠㅠ
+#1. stack 2개 사용한 풀이 
 
 N = int(input())
 in_order = list(map(int, input().split()))
@@ -65,7 +65,7 @@ while left_stack or right_stack:
 # print(*sol)
 
 
-# # 재귀를 이용한 풀이
+# 2.재귀를 이용한 풀이
 
 # import sys
 
