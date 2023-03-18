@@ -11,16 +11,19 @@ n, m = map(int, input().split())
 lst = [0] * (n+1)
 dict1 = defaultdict(list)
 
+# 우선 순위 체크
 for _ in range(m):
     A, B = map(int, input().split())
     lst[B] += 1
     dict1[A].append(B)
 
+# 우선 순위가 필요없는 숫자 heapq에 담기
 que = []
 for i in range(1, n+1):
     if not lst[i]:
         heappush(que, i)
 
+# heapq에서 값을 하나씩 출력하면서 우선순위가 해결된 숫자는 heapq에 담기
 sol = []
 while que:
     i = heappop(que)
