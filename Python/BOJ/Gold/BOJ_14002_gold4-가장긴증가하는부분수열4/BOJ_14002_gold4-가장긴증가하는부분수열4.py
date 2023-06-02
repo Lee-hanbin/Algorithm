@@ -9,19 +9,24 @@ n = int(input())
 
 lst = list(map(int, input().split()))
 seq = [lst[0]]
-ans = 1 
-sol = []
-M = 0
+tmp = []
 
 for num in lst[1:]:
     if seq[-1] < num:
         seq.append(num)
-        ans += 1
+        tmp.append((len(seq)-1, num))
     else:
-        index = bisect_left(seq, num)
-        seq[index] = num
-    if ans > M:
-        sol = seq
+        idx = bisect_left(seq, num)
+        seq[idx] = num
+        tmp.append((idx, num))
 
-print(ans)
-print(*sol)
+last_idx = len(seq) - 1
+sol = []
+for i in range(n-1,-1,-1):
+    if tmp[i][0] == last_idx:
+        sol.append(tmp[i][1])
+        last_idx -= 1
+
+print(len(seq))
+print(*sol[::-1])
+
