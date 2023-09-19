@@ -1,3 +1,5 @@
+# BOJ_25314_bronze5_코딩은체육과목입니다
+
 import sys
 input = sys.stdin.readline
 
